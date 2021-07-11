@@ -1,7 +1,7 @@
-const htmlInit = (title,value) => {
+function htmlInit(title,value){
     $("body").append(`
     <div id="ex-score">
-        <h1>${title}</h1>
+        <header>${title}</header>
         <div class="pie">${value}%</div>
         <ul id="content-list">
         </ul>
@@ -10,18 +10,18 @@ const htmlInit = (title,value) => {
     $("#ex-score .pie").css("--pie-value", `${value}%`);
 }
 
-const setTitle = (title) => {
-    $("#ex-score h1").text(title);
+function setTitle(title){   
+    $("#ex-score header").text(title);
 }
 
-const setPieValue = (value) => {
-    $("#ex-score .pie").text(value);
+function setPieValue(value){
+    $("#ex-score .pie").text(`${value}%`);
     $("#ex-score .pie").css("--pie-value", `${value}%`);
 }
 
 let id = 0;
 
-const addListContents = (title,value,callback) => {
+function addListContents(title,value,callback){
     $("#ex-score #content-list").append(`
     <li id="ex-score-${id}">
         <div class="list-title">${title}</div>
@@ -31,4 +31,12 @@ const addListContents = (title,value,callback) => {
     `);
     $(`#ex-score-${id}`).on("click", callback);
     id ++;
+}
+
+function refreshList(){
+    for (let i = 0; i < id; i++) {
+        $(`#ex-score-${i}`).off("click");
+    }
+    $("#ex-score #content-list").empty();
+    id = 0;
 }

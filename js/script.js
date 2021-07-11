@@ -25,17 +25,16 @@ class subject {
 
         //レポートのオブジェクトを生成
         let reports = [];
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 15; i++) {
+            this.length = i;
             const result = new report(i,trs);
-            console.log(result);
             if(result.month != null){
                 reports[i] = result;
             }else{
-                this.reports = reports;
-                this.length = i;
                 break;
             }
         }
+        this.reports = reports;
     }
 
     getReportsByMonth(month) {
@@ -63,16 +62,6 @@ class subject {
         return result;
     }
 
-}
-
-const result = new subject(0);
-
-console.log(result.title);
-console.log(result.progress());
-console.log(result.getReportsByMonth(7));
-
-const ok = () => {
-    window.alert("ok");
 }
 
 $(function() {
