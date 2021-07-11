@@ -1,5 +1,8 @@
 function index(){
-    htmlInit("年間レポート", 50);
+    setTitle("年間レポート");
+    setPieValue(50);
+    removeBackButton();
+    refreshList();
     const trLength =  $("#result_table tbody tr").length
     const reportLength = (trLength - 4) / 3;
     for (let i = 0; i < reportLength; i++) {
@@ -15,6 +18,7 @@ function subjectSection(){
     setTitle(thisSubject.title);
     setPieValue(thisSubject.progress());
     refreshList();
+    setBackButton(index);
     thisSubject.reports.forEach(report => {
         const title = `第${report.index}回`;
         addListContents(title,report.progress,reportFunc);

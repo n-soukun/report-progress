@@ -14,5 +14,6 @@
         }
     ],
     "web_accessible_resources": [
+        "img/arrow_back.svg"
     ]
 }

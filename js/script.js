@@ -65,5 +65,6 @@ class subject {
 }
 
 $(function() {
+    htmlInit("年間レポート", 50);
     index();
 });

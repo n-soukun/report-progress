@@ -14,21 +14,17 @@
     display: block;
     position: fixed;
     width: 420px;
-    height: calc(100vh - 100px);
+    height: 100vh;
     top: 0;
     left: 0;
-    padding-top: 100px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     background: #F5F5F6;
-    overflow-y: auto;
 }
-#ex-score header{
+#ex-score #ex-header{
     display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     font-size: 24px;
-    line-height: 60px;
+    line-height: 64px;
     text-align: center;
     width: 420px;
     height: 60px;
@@ -36,15 +32,39 @@
     color: #fff;
     z-index: 99;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+#ex-score #ex-header p{
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    line-height: 60px;
+}
+#ex-score #ex-header #back-button{
+    content: " ";
+    display: none;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 12px;
+    left: 12px;
+    cursor: pointer;
+}
+#ex-score #ex-body{
+    display: block;
+    position: relative;
+    width: 420px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
 }
 #ex-score .pie{
     --pie-value: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: auto;
-	margin-left: auto;
-    margin-bottom: 50px;
+    margin: 50px auto;
 	width: 300px;
 	height: 300px;
 	font-size: 26px;

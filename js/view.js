@@ -1,17 +1,21 @@
 function htmlInit(title,value){
     $("body").append(`
     <div id="ex-score">
-        <header>${title}</header>
-        <div class="pie">${value}%</div>
-        <ul id="content-list">
-        </ul>
+        <header id="ex-header"><div id="back-button"></div><p>${title}</p></header>
+        <div id="ex-body">
+            <div class="pie">${value}%</div>
+            <ul id="content-list">
+            </ul>
+        </div>
     </div>
     `);
+    const iconPass =  chrome.extension.getURL("img/arrow_back.svg");
+    $("#ex-score #back-button").css("background-image",`url(${iconPass})`);
     $("#ex-score .pie").css("--pie-value", `${value}%`);
 }
 
 function setTitle(title){   
-    $("#ex-score header").text(title);
+    $("#ex-score header p").text(title);
 }
 
 function setPieValue(value){
@@ -39,4 +43,14 @@ function refreshList(){
     }
     $("#ex-score #content-list").empty();
     id = 0;
+}
+
+function setBackButton(callback){
+    $("#ex-score #back-button").css("display", "block");
+    $("#ex-score #back-button").on("click", callback);
+}
+
+function removeBackButton(){
+    $("#ex-score #back-button").css("display", "none");
+    $("#ex-score #back-button").off("click");
 }
