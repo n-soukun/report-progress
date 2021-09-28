@@ -9,11 +9,13 @@
         {
             "matches": ["https://secure.nnn.ed.jp/mypage/result/pc/list/*"],
             "css": ["css/style.css"],
-            "js": ["js/jquery-3.6.0.min.js","js/view.js","js/controller.js","js/script.js"],
+            "js": ["js/jquery-3.6.0.min.js","js/script.js","js/view.js","js/controller.js"],
             "all_frames": true
         }
     ],
     "web_accessible_resources": [
-        "img/arrow_back.svg"
+        "img/arrow_back.svg",
+        "img/clear_back.svg",
+        "img/data_usage.svg"
     ]
 }

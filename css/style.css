@@ -5,55 +5,58 @@
     height: auto;
 }*/
 #container{
-    width: calc(100vw - 444px) !important;
-    margin-left: 420px !important;
+    width: calc(100% - 420px);
+    height: 100vh;
+    overflow-y: scroll;
+    margin-right: 420px;
 }
 #ex-score{
-    --primary-color: #2f3e9e;
-    --gray-color: #E1E2E1;
+    --primary-color: #34D64D;
+    --gray-color: #f5f5f6;
+    --white-color: #fff;
+    --black-color: #444;
     display: block;
     position: fixed;
     width: 420px;
     height: 100vh;
     top: 0;
-    left: 0;
+    right: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    background: #F5F5F6;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+    background: var(--white-color);
     overflow-x: hidden;
 }
-#ex-score #ex-header{
-    display: block;
+#ex-score .ex-header{
+    display: flex;
+    align-items: center;
     position: relative;
-    font-size: 24px;
-    line-height: 64px;
-    text-align: center;
-    width: 420px;
+    width: 100%;
     height: 60px;
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: var(--white-color);
+    color: var(--black-color);
     z-index: 99;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
 }
-#ex-score #ex-header p{
+#ex-score .ex-header p{
     margin: 0;
+    margin-left: 16px;
     padding: 0;
     height: 60px;
     line-height: 60px;
+    font-size: 20px;
 }
-#ex-score #ex-header #back-button{
+#ex-score .ex-header #back-button{
     content: " ";
-    display: none;
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    top: 12px;
-    left: 12px;
+    display: block;
+    margin-left: 16px;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
 }
-#ex-score #ex-body{
+#ex-score .ex-body{
     display: block;
     position: relative;
     width: 420px;
@@ -74,46 +77,58 @@
 	background-image: radial-gradient(#ffffff 60%, transparent 61%), conic-gradient(var(--primary-color) 0% var(--pie-value), var(--gray-color) var(--pie-value) 100%);
 	border-radius: 50%;
 }
-#ex-score #content-list{
+#ex-score .item-list{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     list-style: none;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     margin: 0;
-    padding-left: 0;
+    width: calc(100% - 32px);
+    padding: 32px 16px;
 }
-#ex-score #content-list li{
-    display: block;
-    width: calc(100% - 24px);
-    padding: 12px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+#ex-score .item-list li{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: calc(100% - 32px);
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
     background-color: #ffffff;
-    transition: background-color 0.2s;
+    transition: border 0.1s;
     cursor: pointer;
 }
-#ex-score #content-list li:hover{
-    background-color: #ebf6fd;
+#ex-score .item-list li:hover{
+    border: 1px solid var(--primary-color);
 }
-#ex-score #content-list li .list-title{
+#ex-score .item-list li .list-title{
     font-size: 18px;
-    margin-bottom: 8px;
-    font-weight: 700;
+    margin-bottom: 1px;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-#ex-score #content-list li .list-value{
-    font-size: 14px;
+#ex-score .item-list li .list-value{
+    font-size: 13px;
 }
-#ex-score #content-list li .bar{
+#ex-score .item-list li .bar{
     content: " ";
     display: block;
     position: relative;
-    width: 100%;
-    height: 6px;
+    width: 100px;
+    height: 38px;
     background: var(--gray-color);
+    border-radius: 12px;
+    overflow: hidden;
 }
-#ex-score #content-list li .bar-val{
+#ex-score .item-list li .bar-val{
     content: " ";
     display: block;
     position: absolute;
     width: 42%;
-    height: 6px;
+    height: 100%;
     top: 0;
     left: 0;
     background: var(--primary-color);
