@@ -68,3 +68,7 @@ $(function() {
     htmlInit("年間レポート", 50);
     index();
 });
+
+const pageReload = () => {
+    
+}

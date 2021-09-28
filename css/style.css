@@ -19,6 +19,7 @@
     left: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     background: #F5F5F6;
+    overflow-x: hidden;
 }
 #ex-score #ex-header{
     display: block;

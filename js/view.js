@@ -46,11 +46,11 @@ function refreshList(){
 }
 
 function setBackButton(callback){
-    $("#ex-score #back-button").css("display", "block");
+    $("#ex-score #back-button").fadeIn(200);
     $("#ex-score #back-button").on("click", callback);
 }
 
 function removeBackButton(){
-    $("#ex-score #back-button").css("display", "none");
+    $("#ex-score #back-button").fadeOut(200);
     $("#ex-score #back-button").off("click");
 }

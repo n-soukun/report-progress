@@ -9,9 +9,10 @@ function index(){
         const subjectObj = new subject(i);
         addListContents(subjectObj.title, subjectObj.progress(),subjectSection);
     }
+    $('#ex-score #ex-body').animate({ scrollTop: 0 }, 500);
 }
 
-function subjectSection(){ 
+function subjectSection(){
     const elementId = $(this).attr("id");
     const subjectId = elementId.match(/\d+$/);
     const thisSubject = new subject(subjectId);
@@ -23,7 +24,7 @@ function subjectSection(){
         const title = `第${report.index}回`;
         addListContents(title,report.progress,reportFunc);
     });
-    $('#ex-score').animate({ scrollTop: 0 }, 500);
+    $('#ex-score #ex-body').animate({ scrollTop: 0 }, 500);
 }
 
 function reportFunc(){
