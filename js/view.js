@@ -74,7 +74,8 @@ class App{
         this.pages[id].render("#ex-score");
     }
     removePage(id){
-        this.pages[id].remove()
+        this.pages[id].remove();
+        this.pages.splice(id, 1);
     }
 }
 
@@ -89,22 +90,52 @@ class Page{
     render(parentElement){
         const id = this.id;
         $(parentElement).append(`
-        <section id="ex-page-${this.id}">
+        <section id="ex-page-${this.id}" class="ex-page">
         <header id="ex-header-${this.id}" class="ex-header">
             <div id="back-button"></div><p>${this.contents.title}</p>
         </header>
         <div id="ex-body-${this.id}" class="ex-body"></div>
         </section>` 
         );
+        $(`#ex-page-${this.id}`).css('z-index', id);
+        if(this.id == 0){
+            const iconPass =  chrome.extension.getURL("img/data_usage.svg");
+            $(`#ex-page-${this.id} #back-button`).css("background-image",`url(${iconPass})`);
+        }else{
+            const iconPass =  chrome.extension.getURL("img/arrow_back.svg");
+            $(`#ex-page-${this.id} #back-button`).css("background-image",`url(${iconPass})`);
+            $(`#ex-page-${this.id} #back-button`).on("click", this.contents.callback);
+        }
         this.contents.items.forEach(item => {
-            console.log(item);
             item.render(`#ex-body-${this.id}`);
         });
     }
     remove(){
-        this.contents.items.forEach(item => {
-            item.remove();
-        });
+        $(` #ex-page-${this.id}`).addClass("pageOut");
+        setTimeout(()=>{
+            this.contents.items.forEach(item => {
+                item.remove();
+            });
+            $(`#ex-page-${this.id}`).remove();
+        },400);
+    }
+}
+
+class ProgressBar{
+    constructor (val) {
+        this.val = val;
+        this.pageId = null;
+    }
+    render(parentElement){
+        $(parentElement).append(`
+            <div id="progress-bar-${this.pageId}" class="progress-bar">
+                <div class="progress-text">進捗度</div>
+                 <div class="bar"><span class="bar-text">${this.val}%</span><div class="bar-val" style="width:${this.val}%;"><span class="bar-val-text">${this.val}%</span></div></div>
+            </div>
+        `);
+    }
+    remove(){
+
     }
 }
 
@@ -115,16 +146,16 @@ class ItemList{
         this.pageId = null;
     }
     render(parentElement){
-        $(parentElement).append(`<ul id="content-list-${this.id}" class="item-list"></ul>`);
+        $(parentElement).append(`<ul id="content-list-${this.pageId}-${this.id}" class="item-list"></ul>`);
         let id = 0;
         this.items.forEach(item => {
             const itemId = `${this.pageId}-${this.id}-${id}`
-            $(`#content-list-${this.id}`).append(`
+            $(`#content-list-${this.pageId}-${this.id}`).append(`
             <li id="ex-score-${itemId}">
-                <div class="bar"><div class="bar-val" style="width:${item.value}%;"></div></div>
+                <div class="bar"><span class="bar-text">${item.value}% </span><div class="bar-val" style="width:${item.value}%;"><span class="bar-val-text">${item.value}% </span></div></div>
                 <div class="list-content">
                     <div class="list-title">${item.title}</div>
-                    <div class="list-value">進捗度${item.value}%</div>
+                    <div class="list-value">${item.text}</div>
                 </div>
             </li>
             `);
@@ -137,6 +168,6 @@ class ItemList{
             const itemId = `${this.pageId}-${this.id}-${id}`
             $(`#ex-score-${itemId}`).off("click");
         }
-        $(`#content-list-${this.id}`).remove();
+        $(`#content-list-${this.pageId}-${this.id}`).remove();
     }
 }

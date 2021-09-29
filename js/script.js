@@ -25,20 +25,22 @@ class Subject {
         this.reports = reports;
     }
 
-    getReportsByMonth(month) {
-        let reports = [];
-        let i = 0;
+    progress() {
+        let totalProgress = 0;
         this.reports.forEach( report => {
-            if(report.month == month){
-                reports[i] = report;
-                i ++;
-            }
+            totalProgress += report.progress;
         });
-        if(i){
-            return reports;
-        }else{
-            return null;
-        }
+        const result = Math.round((totalProgress / (100 * this.reports.length)) * 100);
+        return result;
+    }
+
+}
+
+class MonthlyReport {
+    constructor (id,reports) {
+        this.id = id;
+        this.title = id+"月レポート";
+        this.reports = reports;
     }
 
     progress() {
@@ -84,6 +86,11 @@ class GradeData{
         let reports = this.reports.filter((item) => item.subjectId == id);
         const name = this.subjectNames[id];
         return new Subject(id,name,reports);
+    }
+
+    getMonthlyReport(id) {
+        let reports = this.reports.filter((item) => item.subjectId == id);
+        return new MonthlyReport(id,reports);
     }
 
     progress() {

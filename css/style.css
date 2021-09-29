@@ -11,7 +11,8 @@
     margin-right: 420px;
 }
 #ex-score{
-    --primary-color: #34D64D;
+    /*--primary-color: #34D64D;*/
+    --primary-color: #1f286f;
     --gray-color: #f5f5f6;
     --white-color: #fff;
     --black-color: #444;
@@ -25,6 +26,26 @@
     box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
     background: var(--white-color);
     overflow-x: hidden;
+}
+.ex-page{
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: var(--white-color);
+    animation: pageIn 0.3s ease;
+}
+@keyframes pageIn {
+    0% {left:420px;}
+    100% {left:0px;}
+}
+.pageOut{
+    animation: pageOut 0.4s ease;
+}
+@keyframes pageOut {
+    0% {left:0px;}
+    100% {left:420px;}
 }
 #ex-score .ex-header{
     display: flex;
@@ -82,7 +103,6 @@
     flex-direction: column;
     gap: 16px;
     list-style: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
     margin: 0;
     width: calc(100% - 32px);
     padding: 32px 16px;
@@ -115,13 +135,19 @@
 }
 #ex-score .item-list li .bar{
     content: " ";
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     width: 100px;
     height: 38px;
     background: var(--gray-color);
     border-radius: 12px;
     overflow: hidden;
+}
+#ex-score .item-list li .bar-text{
+    color: var(--primary-color);
+    font-size: 20px;
 }
 #ex-score .item-list li .bar-val{
     content: " ";
@@ -132,4 +158,59 @@
     top: 0;
     left: 0;
     background: var(--primary-color);
+    overflow: hidden;
+}
+#ex-score .item-list li .bar-val-text{
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #fff;
+}
+#ex-score .progress-bar{
+    width: calc(100% - 32px);
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+#ex-score .progress-bar .progress-text{
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+#ex-score .progress-bar .bar{
+    content: " ";
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: calc(100% - 32px);
+    height: 38px;
+    padding: 0 16px;
+    background: var(--gray-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+#ex-score .progress-bar .bar-text{
+    color: var(--primary-color);
+    font-size: 20px;
+}
+#ex-score .progress-bar .bar-val{
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 42%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: var(--primary-color);
+    overflow: hidden;
+}
+#ex-score .progress-bar .bar-val-text{
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #fff;
 }
