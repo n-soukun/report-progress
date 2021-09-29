@@ -4,6 +4,7 @@
     width: 100%;
     height: auto;
 }*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto&display=swap');
 #container{
     width: calc(100% - 420px);
     height: 100vh;
@@ -14,8 +15,9 @@
     /*--primary-color: #34D64D;*/
     --primary-color: #1f286f;
     --gray-color: #f5f5f6;
-    --white-color: #fff;
-    --black-color: #444;
+    --white-color: #ffffff;
+    --black-color: #444444;
+    --gray-border-color: rgba(0,0,0,0.16);
     display: block;
     position: fixed;
     width: 420px;
@@ -26,6 +28,7 @@
     box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
     background: var(--white-color);
     overflow-x: hidden;
+    font-family: 'Roboto', 'Noto Sans JP', sans-serif;
 }
 .ex-page{
     position: absolute;
@@ -56,7 +59,7 @@
     background-color: var(--white-color);
     color: var(--black-color);
     z-index: 99;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 1px 0 var(--gray-border-color);
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -105,7 +108,7 @@
     list-style: none;
     margin: 0;
     width: calc(100% - 32px);
-    padding: 32px 16px;
+    padding: 32px 16px;;
 }
 #ex-score .item-list li{
     display: flex;
@@ -113,14 +116,14 @@
     align-items: center;
     width: calc(100% - 32px);
     padding: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
+    border: 1px solid var(--gray-border-color);
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: var(--white-color);
     transition: border 0.1s;
     cursor: pointer;
 }
 #ex-score .item-list li:hover{
-    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 5px var(--gray-border-color);
 }
 #ex-score .item-list li .list-title{
     font-size: 18px;
@@ -133,17 +136,19 @@
 #ex-score .item-list li .list-value{
     font-size: 13px;
 }
-#ex-score .item-list li .bar{
+#ex-score .bar{
     content: " ";
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
-    width: 100px;
     height: 38px;
     background: var(--gray-color);
     border-radius: 12px;
     overflow: hidden;
+}
+#ex-score .item-list li .bar{
+    justify-content: center;
+    width: 100px;
 }
 #ex-score .item-list li .bar-text{
     color: var(--primary-color);
@@ -167,28 +172,20 @@
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     font-size: 20px;
-    color: #fff;
+    color: var(--white-color);
 }
 #ex-score .progress-bar{
     width: calc(100% - 32px);
     padding: 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    border-bottom: 1px solid var(--gray-border-color);
 }
 #ex-score .progress-bar .progress-text{
     font-size: 14px;
     margin-bottom: 8px;
 }
 #ex-score .progress-bar .bar{
-    content: " ";
-    display: flex;
-    align-items: center;
-    position: relative;
     width: calc(100% - 32px);
-    height: 38px;
     padding: 0 16px;
-    background: var(--gray-color);
-    border-radius: 12px;
-    overflow: hidden;
 }
 #ex-score .progress-bar .bar-text{
     color: var(--primary-color);
