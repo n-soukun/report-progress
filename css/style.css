@@ -26,29 +26,48 @@
     right: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
-    background: var(--white-color);
+    background: #000;
     overflow-x: hidden;
     font-family: 'Roboto', 'Noto Sans JP', sans-serif;
 }
 .ex-page{
     position: absolute;
     top: 0;
-    left: 0px;
+    left: 0%;
     width: 100%;
     height: 100%;
     background: var(--white-color);
     animation: pageIn 0.3s ease;
 }
 @keyframes pageIn {
-    0% {left:420px;}
-    100% {left:0px;}
+    0% {left:100%;}
+    100% {left:0%;}
 }
 .pageOut{
-    animation: pageOut 0.4s ease;
+    animation: pageOut 0.3s ease;
+    left: 100%;
 }
 @keyframes pageOut {
-    0% {left:0px;}
-    100% {left:420px;}
+    0% {left:0%;}
+    100% {left:100%;}
+}
+.pageShow{
+    animation: pageShow 0.3s ease;
+    opacity: 1;
+    left: 0px;
+}
+@keyframes pageShow {
+    0% {left:-10%;opacity: 0.8;}
+    100% {left:0px;opacity: 1;}
+}
+.pageHide{
+    animation: pageHide 0.4s ease;
+    opacity: 0;
+    left: -10%;
+}
+@keyframes pageHide {
+    0% {left:0px;opacity: 1;}
+    100% {left:-10%;opacity: 0.8;}
 }
 #ex-score .ex-header{
     display: flex;
@@ -66,18 +85,26 @@
 }
 #ex-score .ex-header p{
     margin: 0;
-    margin-left: 16px;
+    margin-left: 8px;
     padding: 0;
     height: 60px;
     line-height: 60px;
     font-size: 20px;
 }
-#ex-score .ex-header #back-button{
+#ex-score .ex-header .header-button{
     content: " ";
     display: block;
-    margin-left: 16px;
+    margin-left: 8px;
     width: 24px;
     height: 24px;
+    padding: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+}
+#ex-score .ex-header #back-button:hover{
+    background-color: rgba(0, 0, 0, 0.08);
+    transition: background-color 0.2s;
     cursor: pointer;
 }
 #ex-score .ex-body{
