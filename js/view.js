@@ -81,6 +81,7 @@ class ProgressBar{
     constructor (val) {
         this.val = val;
         this.pageId = null;
+        this.element = null;
     }
     render(parentElement){
         $(parentElement).append(`
@@ -89,9 +90,10 @@ class ProgressBar{
                 <div class="bar"><span class="bar-text">${this.val}%</span><div class="bar-val" style="width:${this.val}%;"><span class="bar-val-text">${this.val}%</span></div></div>
             </div>
         `);
+        this.element = $(`#progress-bar-${this.pageId}`).get();
     }
     remove(){
-
+        $(this.element).remove();
     }
 }
 
@@ -134,7 +136,7 @@ class TabControl{
         $(`#ex-body-${this.pageId}`).scrollTop(0);
     }
     remove(){
-
+        $(this.element).remove();
     }
 }
 
@@ -142,31 +144,92 @@ class ItemList{
     constructor (id,array) {
         this.id = id;
         this.items = array;
+        this.element = null;
         this.pageId = null;
     }
     render(parentElement){
         $(parentElement).append(`<ul id="content-list-${this.pageId}-${this.id}" class="item-list"></ul>`);
+        this.element = $(`#content-list-${this.pageId}-${this.id}`).get();
         let id = 0;
         this.items.forEach(item => {
             const itemId = `${this.pageId}-${this.id}-${id}`
-            $(`#content-list-${this.pageId}-${this.id}`).append(`
-            <li id="ex-score-${itemId}">
-                <div class="bar"><span class="bar-text">${item.value}% </span><div class="bar-val" style="width:${item.value}%;"><span class="bar-val-text">${item.value}% </span></div></div>
-                <div class="list-content">
-                    <div class="list-title">${item.title}</div>
-                    <div class="list-value">${item.text}</div>
-                </div>
-            </li>
-            `);
-            $(`#ex-score-${itemId}`).on("click", item.callback);
+            item.itemId = itemId;
+            item.render(this.element);
             id ++;
         });
     }
     remove(){
-        for (let id = 0; id < this.items.length; id++) {
-            const itemId = `${this.pageId}-${this.id}-${id}`
-            $(`#ex-score-${itemId}`).off("click");
+        this.items.forEach(item => {
+            item.remove(); 
+        });
+        $(this.element).remove();
+    }
+}
+
+class Item{
+    constructor(obj) {
+        this.title = obj.title;
+        this.value = obj.value;
+        this.text = obj.text;
+        this.callback = obj.callback;
+        this.argument = obj.argument;
+        this.itemId = null;
+        this.element = null;
+    }
+    render(parentElement){
+        $(parentElement).append(`
+        <li id="ex-score-${this.itemId}" class="item">
+            <div class="bar"><span class="bar-text">${this.value}% </span><div class="bar-val" style="width:${this.value}%;"><span class="bar-val-text">${this.value}% </span></div></div>
+            <div class="list-content">
+                <div class="list-title">${this.title}</div>
+                <div class="list-value">${this.text}</div>
+            </div>
+        </li>
+        `);
+        this.element = $(`#ex-score-${this.itemId}`).get();
+        if(this.argument != null){
+            Object.keys(this.argument).forEach(key => {
+                $(this.element).data(`${key}`,`${this.argument[key]}`);
+            });
         }
-        $(`#content-list-${this.pageId}-${this.id}`).remove();
+        $(this.element).on("click", this.callback);
+    }
+    remove(){
+        $(this.element).off("click");
+        $(this.element).remove();
+    }
+}
+
+class BigItem{
+    constructor(obj) {
+        this.title = obj.title;
+        this.value = obj.value;
+        this.text = obj.text;
+        this.callback = obj.callback;
+        this.argument = obj.argument;
+        this.itemId = null;
+        this.element = null;
+    }
+    render(parentElement){
+        $(parentElement).append(`
+        <li id="ex-score-${this.itemId}" class="big-item">
+            <div class="bar"><span class="bar-text">${this.value}% </span><div class="bar-val" style="height:${this.value}%;"><span class="bar-val-text">${this.value}% </span></div></div>
+            <div class="list-content">
+                <div class="list-title">${this.title}</div>
+                <div class="list-value">${this.text}</div>
+            </div>
+        </li>
+        `);
+        this.element = $(`#ex-score-${this.itemId}`).get();
+        if(this.argument != null){
+            Object.keys(this.argument).forEach(key => {
+                $(this.element).data(`${key}`,`${this.argument[key]}`);
+            });
+        }
+        $(this.element).on("click", this.callback);
+    }
+    remove(){
+        $(this.element).off("click");
+        $(this.element).remove();
     }
 }

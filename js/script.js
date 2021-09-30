@@ -105,9 +105,7 @@ class GradeData{
 }
 
 $(function() {
-    /*htmlInit("進捗度グラフ", 0);
-    index();*/
-    test();
+    homeSection();
 });
 
 const pageReload = () => {

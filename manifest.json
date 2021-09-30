@@ -16,6 +16,7 @@
     "web_accessible_resources": [
         "img/arrow_back.svg",
         "img/clear_back.svg",
-        "img/data_usage.svg"
+        "img/data_usage.svg",
+        "img/navigate_next.svg"
     ]
 }

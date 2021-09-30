@@ -12,7 +12,6 @@
     margin-right: 420px;
 }
 #ex-score{
-    /*--primary-color: #34D64D;*/
     --primary-color: #1f286f;
     --gray-color: #f5f5f6;
     --white-color: #ffffff;
@@ -110,9 +109,11 @@
     display: block;
     position: relative;
     width: 420px;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 56px);
     overflow-y: auto;
 }
+
+/*ItemList*/
 #ex-score .item-list{
     display: flex;
     flex-direction: column;
@@ -122,8 +123,11 @@
     width: calc(100% - 32px);
     padding: 32px 16px;
 }
-#ex-score .item-list li{
+
+/*Item & BigItem*/
+#ex-score .item-list .item,#ex-score .item-list .big-item{
     display: flex;
+    position: relative;
     gap: 16px;
     align-items: center;
     width: calc(100% - 32px);
@@ -134,20 +138,41 @@
     transition: border 0.1s;
     cursor: pointer;
 }
-#ex-score .item-list li:hover{
+#ex-score .item-list .big-item::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-image: url(chrome-extension://__MSG_@@extension_id__/img/navigate_next.svg);
+}
+#ex-score .item-list .item:hover, #ex-score .item-list .big-item:hover{
     box-shadow: 0 0 5px var(--gray-border-color);
 }
-#ex-score .item-list li .list-title{
-    font-size: 18px;
+#ex-score .item-list .item .list-title,#ex-score .item-list .big-item .list-title{
     margin-bottom: 1px;
     max-width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#ex-score .item-list li .list-value{
+#ex-score .item-list .item .list-title{
+    font-size: 18px;
+}
+#ex-score .item-list .big-item .list-title{
+    font-size: 20px;
+}
+#ex-score .item-list .item .list-value{
     font-size: 13px;
 }
+#ex-score .item-list .big-item .list-value{
+    font-size: 14px;
+}
+
+/*Progress basr*/
 #ex-score .bar{
     content: " ";
     display: flex;
@@ -158,33 +183,48 @@
     border-radius: 12px;
     overflow: hidden;
 }
-#ex-score .item-list li .bar{
-    justify-content: center;
-    width: 100px;
-}
-#ex-score .item-list li .bar-text{
-    color: var(--primary-color);
-    font-size: 20px;
-}
-#ex-score .item-list li .bar-val{
+#ex-score .bar-val{
     content: " ";
     display: block;
     position: absolute;
-    width: 42%;
+    width: 100%;
     height: 100%;
-    top: 0;
+    bottom: 0;
     left: 0;
     background: var(--primary-color);
     overflow: hidden;
 }
-#ex-score .item-list li .bar-val-text{
+#ex-score .bar-text{
+    color: var(--primary-color);
+    font-size: 20px;
+}
+#ex-score .bar-val-text{
     position: absolute;
+    font-size: 20px;
+    color: var(--white-color);
+}
+#ex-score .item-list .item .bar{
+    justify-content: center;
+    width: 100px;
+    height: 38px;
+}
+#ex-score .item-list .item .bar-val-text{
     top: 50%;
     left: 50px;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: var(--white-color);
+}
+#ex-score .item-list .big-item .bar{
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+#ex-score .item-list .big-item .bar-val-text{
+    bottom: 50px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
 }
 #ex-score .progress-bar{
     width: calc(100% - 32px);
@@ -199,29 +239,11 @@
     width: calc(100% - 32px);
     padding: 0 16px;
 }
-#ex-score .progress-bar .bar-text{
-    color: var(--primary-color);
-    font-size: 20px;
-}
-#ex-score .progress-bar .bar-val{
-    content: " ";
-    display: block;
-    position: absolute;
-    width: 42%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: var(--primary-color);
-    overflow: hidden;
-}
 #ex-score .progress-bar .bar-val-text{
-    position: absolute;
     top: 50%;
     left: 16px;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    font-size: 20px;
-    color: #fff;
 }
 
 /*TabControl*/
