@@ -131,6 +131,7 @@ class TabControl{
         this.currentTab = id;
         $(this.element).find(`#tab-button-${this.currentTab}`).addClass("selected-tab");
         $(this.element).find(`#tab-section-${this.currentTab}`).addClass("active-tab");
+        $("#ex-score").scrollTop(0);
     }
     remove(){
 
