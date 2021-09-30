@@ -66,7 +66,7 @@ class Page{
                 item.remove();
             });
             $(this.element).remove();
-        },400);
+        },300);
     }
     show(){
         $(this.element).removeClass('pageHide');
@@ -86,7 +86,7 @@ class ProgressBar{
         $(parentElement).append(`
             <div id="progress-bar-${this.pageId}" class="progress-bar">
                 <div class="progress-text">進捗度</div>
-                 <div class="bar"><span class="bar-text">${this.val}%</span><div class="bar-val" style="width:${this.val}%;"><span class="bar-val-text">${this.val}%</span></div></div>
+                <div class="bar"><span class="bar-text">${this.val}%</span><div class="bar-val" style="width:${this.val}%;"><span class="bar-val-text">${this.val}%</span></div></div>
             </div>
         `);
     }
@@ -100,13 +100,37 @@ class TabControl{
         this.contents = obj;
         this.pageId = null;
         this.element = null;
+        this.currentTab = 0;
     }
     render(parentElement){
-        for (let i = 0; i < this.contents.items.length; i++) {
-            const item = this.contents.items[i];
-            item.pageId = this.pageId;
+        $(parentElement).append(`
+        <div id="tab-box-${this.pageId}" class="tab-box">
+            <div class="tab-control"></div>
+            <div class="tab-content"></div>
+        </div>`);
+        this.element = $(`#tab-box-${this.pageId}`).get();
+        for (let i = 0; i < this.contents.tabs.length; i++) {
+            const tab = this.contents.tabs[i];
+            $(this.element).find('.tab-control').append(`<div id="tab-button-${i}" class="tab-button">${tab.title}</div>`);
+            $(this.element).find('.tab-content').append(`<div id="tab-section-${i}" class="tab-section"></div>`);
+            tab.items.forEach(item => {
+                item.pageId = this.pageId;
+                item.render(`#tab-section-${i}`);
+            });
+            $(this.element).find(`#tab-button-${i}`).on('click', ()=>{
+                this.change(i);
+            });
         }
-
+        $(this.element).find(`#tab-button-${this.currentTab}`).addClass("selected-tab");
+        $(this.element).find(`#tab-section-${this.currentTab}`).addClass("active-tab");
+        $(this.element).css("height", this.contents.height);
+    }
+    change(id){
+        $(this.element).find(`#tab-button-${this.currentTab}`).removeClass("selected-tab");
+        $(this.element).find(`#tab-section-${this.currentTab}`).removeClass("active-tab");
+        this.currentTab = id;
+        $(this.element).find(`#tab-button-${this.currentTab}`).addClass("selected-tab");
+        $(this.element).find(`#tab-section-${this.currentTab}`).addClass("active-tab");
     }
     remove(){
 

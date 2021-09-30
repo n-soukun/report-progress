@@ -58,6 +58,7 @@ class GradeData{
     constructor () {
         this.reports = [];
         this.subjectNames = [];
+        this.month = [6,7,8,9,10,11,12];
         const subjectsLength = ($("#result_table tbody tr").length - 4) / 3;
         let reportLength = 0
         for (let i = 0; i < subjectsLength; i++) {
@@ -89,7 +90,7 @@ class GradeData{
     }
 
     getMonthlyReport(id) {
-        let reports = this.reports.filter((item) => item.subjectId == id);
+        let reports = this.reports.filter((item) => item.month == id);
         return new MonthlyReport(id,reports);
     }
 
