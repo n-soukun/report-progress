@@ -98,11 +98,11 @@ class ProgressBar{
 }
 
 class TabControl{
-    constructor (obj) {
+    constructor (obj,currentTab) {
         this.contents = obj;
         this.pageId = null;
         this.element = null;
-        this.currentTab = 0;
+        this.currentTab = currentTab;
     }
     render(parentElement){
         $(parentElement).append(`
@@ -117,7 +117,7 @@ class TabControl{
             $(this.element).find('.tab-content').append(`<div id="tab-section-${i}" class="tab-section"></div>`);
             tab.items.forEach(item => {
                 item.pageId = this.pageId;
-                item.render(`#tab-section-${i}`);
+                item.render($(this.element).find(`#tab-section-${i}`).get());
             });
             $(this.element).find(`#tab-button-${i}`).on('click', ()=>{
                 this.change(i);

@@ -34,6 +34,23 @@ class Subject {
         return result;
     }
 
+    getIncompleteReports() {
+        let reports = this.reports.filter((item) => item.progress < 100);
+        reports.sort(function(a, b) {
+            if (a.progress > b.progress) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+        return reports;
+    }
+
+    getCompleteReports() {
+        let reports = this.reports.filter((item) => item.progress == 100);
+        return reports;
+    }
+    
 }
 
 class MonthlyReport {
@@ -52,6 +69,22 @@ class MonthlyReport {
         return result;
     }
 
+    getIncompleteReports() {
+        let reports = this.reports.filter((item) => item.progress < 100);
+        reports.sort(function(a, b) {
+            if (a.progress > b.progress) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+        return reports;
+    }
+
+    getCompleteReports() {
+        let reports = this.reports.filter((item) => item.progress == 100);
+        return reports;
+    }
 }
 
 class GradeData{
