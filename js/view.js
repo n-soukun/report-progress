@@ -78,8 +78,8 @@ class Page{
 }
 
 class ProgressBar{
-    constructor (val) {
-        this.val = val;
+    constructor (value) {
+        this.value = value;
         this.pageId = null;
         this.element = null;
     }
@@ -87,10 +87,18 @@ class ProgressBar{
         $(parentElement).append(`
             <div id="progress-bar-${this.pageId}" class="progress-bar">
                 <div class="progress-text">進捗度</div>
-                <div class="bar"><span class="bar-text">${this.val}%</span><div class="bar-val" style="width:${this.val}%;"><span class="bar-val-text">${this.val}%</span></div></div>
+                <div class="bar">
+                    <span class="bar-text">${this.value}%</span>
+                    <div class="bar-val">
+                        <span class="bar-val-text">${this.value}%</span>
+                    </div>
+                </div>
             </div>
         `);
         this.element = $(`#progress-bar-${this.pageId}`).get();
+        $(this.element).find('.bar-val').animate({
+            width: `${this.value}%`
+        }, 800, "swing" );
     }
     remove(){
         $(this.element).remove();
@@ -179,7 +187,12 @@ class Item{
     render(parentElement){
         $(parentElement).append(`
         <li id="ex-score-${this.itemId}" class="item">
-            <div class="bar"><span class="bar-text">${this.value}% </span><div class="bar-val" style="width:${this.value}%;"><span class="bar-val-text">${this.value}% </span></div></div>
+            <div class="bar">
+                <span class="bar-text">${this.value}% </span>
+                <div class="bar-val">
+                    <span class="bar-val-text">${this.value}% </span>
+                </div>
+            </div>
             <div class="list-content">
                 <div class="list-title">${this.title}</div>
                 <div class="list-value">${this.text}</div>
@@ -193,6 +206,9 @@ class Item{
             });
         }
         $(this.element).on("click", this.callback);
+        $(this.element).find('.bar-val').animate({
+            width: this.value
+        }, 800, "swing" );
     }
     remove(){
         $(this.element).off("click");
