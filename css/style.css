@@ -4,24 +4,33 @@
     width: 100%;
     height: auto;
 }*/
+:root{
+    --ex-app-width: 360px;
+}
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto&display=swap');
 #container{
-    width: calc(100% - 420px);
+    width: calc(100% - var(--ex-app-width));
     height: 100vh;
     overflow-y: scroll;
-    margin-right: 420px;
+    margin-right: var(--ex-app-width);
 }
 #ex-score{
-    --primary-color: #449dc7;
+    --primary-color: #1f286f;
     --gray-color: #f5f5f6;
-    --white-color: #f9f9f9;
+    --white-color: #ffffff;
     --light--white-color: #ffffff;
-    --dark--white-color: #eaeaea;
+    --dark--white-color: #e9e9e9;
     --black-color: #444444;
     --gray-border-color: rgba(0,0,0,0.16);
+    --progress-bar-color: var(--primary-color);
+    --progress-bar-color-sub: var(--primary-color);
+    --shadow: 4px 4px 4px var(--dark--white-color),
+                -4px -4px 4px var(--light--white-color);
+    --shadow-inset: inset 4px 4px 4px var(--dark--white-color),
+                    inset -4px -4px 4px var(--light--white-color);
     display: block;
     position: fixed;
-    width: 420px;
+    width: var(--ex-app-width);
     height: 100vh;
     top: 0;
     right: 0;
@@ -110,7 +119,7 @@
 #ex-score .ex-body{
     display: block;
     position: relative;
-    width: 420px;
+    width: var(--ex-app-width);
     height: calc(100vh - 56px);
     overflow-y: auto;
 }
@@ -134,8 +143,7 @@
     align-items: center;
     width: calc(100% - 32px);
     padding: 16px;
-    box-shadow: 5px 5px 5px var(--dark--white-color),
-    -5px -5px 5px var(--light--white-color);
+    border: 1px solid var(--gray-border-color);
     border-radius: 10px;
     background-color: var(--white-color);
     transition: border 0.1s;
@@ -153,6 +161,7 @@
     background-image: url(chrome-extension://__MSG_@@extension_id__/img/navigate_next.svg);
 }
 #ex-score .item-list .item:hover, #ex-score .item-list .big-item:hover{
+    box-shadow: 0 2px 4px rgba(0,0,0,0.16);
 }
 #ex-score .item-list .item .list-title,#ex-score .item-list .big-item .list-title{
     margin-bottom: 1px;
@@ -180,14 +189,9 @@
     display: flex;
     align-items: center;
     position: relative;
-    height: 30px;
-    background: var(--white-color);
-    border: 4px solid var(--white-color);
-    border-radius: 30px;
-    box-shadow: inset 5px 5px 5px var(--dark--white-color),
-            inset -5px -5px 5px var(--light--white-color),
-            5px 5px 5px var(--dark--white-color),
-            -5px -5px 5px var(--light--white-color);
+    height: 38px;
+    background: var(--gray-color);
+    border-radius: 38px;
     overflow: hidden;
 }
 #ex-score .bar-val{
@@ -197,7 +201,6 @@
     height: 100%;
     bottom: 0;
     left: 0;
-    background: var(--primary-color);
     overflow: hidden;
 }
 #ex-score .bar-text{
@@ -215,7 +218,8 @@
     height: 38px;
 }
 #ex-score .item-list .item .bar-val{
-    border-radius: 30px;
+    background: var(--progress-bar-color-sub);
+    border-radius: 38px;
     width: 0;
 }
 #ex-score .item-list .item .bar-val-text{
@@ -231,6 +235,7 @@
     border-radius: 100%;
 }
 #ex-score .item-list .big-item .bar-val{
+    background: var(--progress-bar-color);
     width: 100%;
 }
 #ex-score .item-list .big-item .bar-val-text{
@@ -249,11 +254,12 @@
     margin-bottom: 8px;
 }
 #ex-score .progress-bar .bar{
-    width: calc(100% - 40px);
+    width: calc(100% - 32px);
     padding: 0 16px;
 }
 #ex-score .progress-bar .bar-val{
-    border-radius: 30px;
+    background: var(--progress-bar-color);
+    border-radius: 38px;
 }
 #ex-score .progress-bar .bar-val-text{
     top: 50%;
