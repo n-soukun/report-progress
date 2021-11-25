@@ -15,18 +15,23 @@ function homeSection(){
         new BigItem({
             title: "年間レポート",
             value: gradeData.progress(),
-            text: "〆12/15",
+            text: `〆${gradeData.month.slice(-1)[0]}/15`,
             callback: yearSection,
             argument: {}
-        }),
-        new BigItem({
-            title: "10月レポート",
-            value: (gradeData.getMonthlyReport(10)).progress(),
-            text: "〆10/15",
-            callback: monthSection,
-            argument: {id:10}
         })
     ]
+    const notDoneReports = gradeData.getNotDoneReports();
+    notDoneReports.forEach(month => {
+        items.push(
+            new BigItem({
+                title: `${month}月レポート`,
+                value: (gradeData.getMonthlyReport(month)).progress(),
+                text: `〆${month}/15`,
+                callback: monthSection,
+                argument: {id:month}
+            })
+        )
+    });
     obj.items.push(new ItemList(0,items));
     app.createPage(obj);
 }
@@ -117,7 +122,7 @@ function subjectSection(){
         ],
         height : "initial"
     }
-    let currentTab = 0
+    let currentTab = 0;
     if(incompleteReportItems.length == 0) currentTab = 1;
     obj.items.push(new ProgressBar(subject.progress()));
     obj.items.push(new TabControl(tabObj, currentTab));

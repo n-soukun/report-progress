@@ -165,7 +165,7 @@
 }
 #ex-score .item-list .item .list-title,#ex-score .item-list .big-item .list-title{
     margin-bottom: 1px;
-    max-width: 220px;
+    max-width: 190px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

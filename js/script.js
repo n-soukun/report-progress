@@ -91,7 +91,7 @@ class GradeData{
     constructor () {
         this.reports = [];
         this.subjectNames = [];
-        this.month = [6,7,8,9,10,11,12];
+        this.month = [];
         const subjectsLength = ($("#result_table tbody tr").length - 4) / 3;
         let reportLength = 0
         for (let i = 0; i < subjectsLength; i++) {
@@ -107,6 +107,9 @@ class GradeData{
             for (let i2 = 0; i2 < 15; i2++) {
                 const result = new Report(i2,trs,i);
                 if(result.month != null){
+                    if(this.month.indexOf(result.month) == -1){
+                        this.month.push(result.month);
+                    }
                     this.reports[reportLength] = result;
                     reportLength++;
                 }else{
@@ -125,6 +128,36 @@ class GradeData{
     getMonthlyReport(id) {
         let reports = this.reports.filter((item) => item.month == id);
         return new MonthlyReport(id,reports);
+    }
+
+    getNotDoneReports(){
+        let NotDoneReports = this.month.filter((item) => (this.getMonthlyReport(item)).progress() != 100);
+        let showMonth = [];
+        NotDoneReports.forEach(report => {
+            let periodMonth = report;
+            const date = new Date();
+            const today = date.getDate();
+            const ThisMonth = date.getMonth() + 1;
+            if(ThisMonth >= this.month[0]){//今年
+                if(periodMonth < this.month[0]){
+                    periodMonth += 12;
+                }
+            }else{//来年
+                if(periodMonth >= this.month[0]){
+                    periodMonth -= 12;
+                }
+            }
+            let diffMonth = periodMonth - ThisMonth;
+            if(today > 16){
+                diffMonth -= 1;
+            }
+            if(diffMonth < 1){
+                showMonth.push(report);
+            }else if(showMonth.length == 0){
+                showMonth.push(report);
+            }
+        });
+        return showMonth;
     }
 
     progress() {
