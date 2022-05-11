@@ -1,9 +1,3 @@
-/*html,body{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: auto;
-}*/
 :root{
     --ex-app-width: 360px;
 }
@@ -110,6 +104,12 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
+}
+#ex-score .ex-header .header-button#home{
+    background-image: url(chrome-extension://__MSG_@@extension_id__/img/data_usage.svg);
+}
+#ex-score .ex-header .header-button#back-button{
+    background-image: url(chrome-extension://__MSG_@@extension_id__/img/arrow_back.svg);
 }
 #ex-score .ex-header #back-button:hover{
     background-color: rgba(0, 0, 0, 0.08);

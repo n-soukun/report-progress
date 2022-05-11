@@ -1,8 +1,10 @@
+import $ from 'jquery'
+
 class ProgressBar{
     constructor (value) {
-        this.value = value;
-        this.pageId = null;
-        this.element = null;
+        this.value = value
+        this.pageId = null
+        this.element = null
     }
     render(parentElement){
         $(parentElement).append(`
@@ -15,15 +17,15 @@ class ProgressBar{
                     </div>
                 </div>
             </div>
-        `);
-        this.element = $(`#progress-bar-${this.pageId}`).get();
+        `)
+        this.element = $(`#progress-bar-${this.pageId}`).get()
         $(this.element).find('.bar-val').animate({
             width: `${this.value}%`
-        }, 800, "swing" );
+        }, 800, "swing" )
     }
     remove(){
-        $(this.element).remove();
+        $(this.element).remove()
     }
 }
 
-export default ProgressBar;
+export default ProgressBar

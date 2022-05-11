@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 class Report {
     constructor (index,trElements,subjectId) {
         const limitDate = trElements[0].getElementsByTagName("td")[index + 1].textContent;
@@ -169,3 +171,5 @@ class GradeData{
         return result;
     }
 }
+
+export default GradeData

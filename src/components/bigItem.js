@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 class BigItem{
     constructor(obj) {
         this.title = obj.title;
@@ -32,4 +34,4 @@ class BigItem{
     }
 }
 
-export default BigItem;
+export default BigItem

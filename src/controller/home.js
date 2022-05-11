@@ -1,9 +1,15 @@
+import { gradeData, app } from '../app'
+import BigItem from '../components/bigItem'
+import ItemList from '../components/itemList'
+import yearSection from './yearSection'
+import monthSection from './monthSection'
+ 
 function homeSection(){
     const obj = {
         title : "レポート進捗度(beta)",
         items : []
     }
-    items = [
+    let items = [
         new BigItem({
             title: "年間レポート",
             value: gradeData.progress(),
@@ -23,9 +29,9 @@ function homeSection(){
                 argument: {id:month}
             })
         )
-    });
-    obj.items.push(new ItemList(0,items));
-    app.createPage(obj);
+    })
+    obj.items.push(new ItemList(0,items))
+    app.createPage(obj)
 }
 
 export default homeSection;
