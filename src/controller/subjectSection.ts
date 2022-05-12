@@ -1,16 +1,17 @@
 import $ from 'jquery'
 import { gradeData, app } from '../app'
-import Item from '../components/item'
-import ItemList from '../components/itemList'
-import ProgressBar from '../components/ProgressBar'
+import ListItem from '../components/listItem'
+import List from '../components/list'
+import ProgressBar from '../components/progressBar'
 import TabControl from '../components/tabControl'
 import backPage from './backPage'
 import reportSection from './reportSection'
+import { PageData } from '../components/page'
 
-function subjectSection(){
+function subjectSection(this: HTMLElement[]){
     const subjectId = $(this).data('id')
     const subject =  gradeData.getSubjectById(subjectId)
-    const obj = {
+    const obj: PageData = {
         title : subject.title,
         items : [],
         callback: backPage
@@ -19,7 +20,7 @@ function subjectSection(){
     let incompleteReportItems = []
     for (let i = 0; i < incompleteReports.length; i++) {
         const report = incompleteReports[i]
-        const item = new Item({
+        const item = new ListItem({
             title: `第${report.index}回`,
             value: report.progress,
             text: `〆${report.month}/15`,
@@ -32,7 +33,7 @@ function subjectSection(){
     let completeReportItems = []
     for (let i = 0; i < completeReports.length; i++) {
         const report = completeReports[i]
-        const item = new Item({
+        const item = new ListItem({
             title: `第${report.index}回`,
             value: report.progress,
             text: `〆${report.month}/15`,
@@ -43,8 +44,8 @@ function subjectSection(){
     }
     const tabObj = {
         tabs : [
-            {title: `未完了- ${incompleteReportItems.length}`,items: [new ItemList(0,incompleteReportItems)]},
-            {title: `完了 - ${completeReportItems.length}`,items: [new ItemList(1,completeReportItems)]}
+            {title: `未完了- ${incompleteReportItems.length}`,items: [new List(0,incompleteReportItems)]},
+            {title: `完了 - ${completeReportItems.length}`,items: [new List(1,completeReportItems)]}
         ],
         height : "initial"
     }

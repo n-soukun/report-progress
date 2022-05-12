@@ -3,10 +3,11 @@ import BigItem from '../components/bigItem'
 import ItemList from '../components/itemList'
 import yearSection from './yearSection'
 import monthSection from './monthSection'
+import { PageData } from '../components/page'
  
 function homeSection(){
-    const obj = {
-        title : "レポート進捗度(beta)",
+    const obj: PageData = {
+        title : "Report Progress",
         items : []
     }
     let items = [

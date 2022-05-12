@@ -1,13 +1,13 @@
 import $ from 'jquery'
 
 class ItemList{
-    constructor (id,array) {
-        this.id = id
-        this.items = array
-        this.element = null
-        this.pageId = null
-    }
-    render(parentElement){
+    element?: HTMLElement[]
+    pageId?: number
+    constructor (
+        public id: number,
+        public items: Array<any>
+    ) {}
+    render(parentElement: string){
         $(parentElement).append(`<ul id="content-list-${this.pageId}-${this.id}" class="item-list"></ul>`)
         this.element = $(`#content-list-${this.pageId}-${this.id}`).get()
         let id = 0
@@ -19,10 +19,12 @@ class ItemList{
         })
     }
     remove(){
-        this.items.forEach(item => {
-            item.remove()
-        })
-        $(this.element).remove()
+        if(this.element){
+            this.items.forEach(item => {
+                item.remove()
+            })
+            $(this.element).remove()
+        }
     }
 }
 

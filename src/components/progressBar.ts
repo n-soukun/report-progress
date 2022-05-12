@@ -1,15 +1,15 @@
 import $ from 'jquery'
 
 class ProgressBar{
-    constructor (value) {
-        this.value = value
-        this.pageId = null
-        this.element = null
-    }
-    render(parentElement){
+    element?: HTMLElement[]
+    pageId?: number
+    constructor (
+        public value: number
+    ){}
+    render(parentElement: string){
         $(parentElement).append(`
             <div id="progress-bar-${this.pageId}" class="progress-bar">
-                <div class="progress-text">進捗度</div>
+                <div class="progress-text">進捗率</div>
                 <div class="bar">
                     <span class="bar-text">${this.value}%</span>
                     <div class="bar-val">
@@ -24,7 +24,9 @@ class ProgressBar{
         }, 800, "swing" )
     }
     remove(){
-        $(this.element).remove()
+        if(this.element){
+            $(this.element).remove()
+        }
     }
 }
 
