@@ -18,8 +18,8 @@
     ],
     "web_accessible_resources": [{
         "resources": [
-            "img/arrow_back.svg",
-            "img/clear_back.svg",
+            "img/arrow_black.svg",
+            "img/clear_black.svg",
             "img/data_usage.svg",
             "img/navigate_next.svg"
         ],

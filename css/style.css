@@ -1,5 +1,5 @@
 :root{
-    --ex-app-width: 360px;
+    --ex-app-width: 0px;
 }
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto&display=swap');
 #container{
@@ -8,6 +8,20 @@
     overflow-y: scroll;
     margin-right: var(--ex-app-width);
 }
+
+#ex-score-open{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    position: fixed;
+    top: 90px;
+    right: 16px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    padding: 8px;
+    border-radius: 50px;
+}
+
 #ex-score{
     --primary-color: #0288D1;
     --secondary-color: #81D4FA;
@@ -77,6 +91,7 @@
 }
 #ex-score .ex-header{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     width: calc(100% - 16px);
@@ -95,7 +110,13 @@
     padding: 8px;
     font-size: 20px;
 }
-#ex-score .ex-header .header-button{
+#ex-score .ex-header .ex-header-inner{
+    display: flex;
+    align-items: center;
+}
+
+/*nav-button*/
+#ex-score .nav-button,#ex-score-open .nav-button{
     content: " ";
     display: block;
     width: 24px;
@@ -105,17 +126,23 @@
     background-position: center;
     border-radius: 50%;
 }
-#ex-score .ex-header .header-button#home{
-    background-image: url(chrome-extension://__MSG_@@extension_id__/img/data_usage.svg);
-}
-#ex-score .ex-header .header-button#back-button{
-    background-image: url(chrome-extension://__MSG_@@extension_id__/img/arrow_back.svg);
-}
-#ex-score .ex-header #back-button:hover{
+#ex-score .nav-button:hover, #ex-score-open .nav-button:hover{
     background-color: rgba(0, 0, 0, 0.08);
     transition: background-color 0.2s;
     cursor: pointer;
 }
+
+/*ボタンの画像を指定*/
+#ex-score .ex-header #home, #ex-score-open #open-panel-button{
+    background-image: url(chrome-extension://__MSG_@@extension_id__/img/data_usage.svg);
+}
+#ex-score .ex-header #back-button{
+    background-image: url(chrome-extension://__MSG_@@extension_id__/img/arrow_black.svg);
+}
+#ex-score .ex-header #close-button{
+    background-image: url(chrome-extension://__MSG_@@extension_id__/img/clear_black.svg);
+}
+
 #ex-score .ex-body{
     display: block;
     position: relative;

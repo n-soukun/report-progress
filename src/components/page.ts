@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import closePanel from '../controller/closePanel'
 
 export interface PageData {
     title: string
@@ -21,7 +22,12 @@ class Page{
         $(parentElement).append(`
         <section id="ex-page-${this.id}" class="ex-page">
         <header id="ex-header-${this.id}" class="ex-header">
-            <div class="header-button"></div><p>${this.contents.title}</p>
+            <div class="ex-header-inner">
+                <div class="header-button nav-button"></div><p>${this.contents.title}</p>
+            </div>
+            <div class="ex-header-inner">
+                <div id="close-button" class="nav-button"></div>
+            </div>
         </header>
         <div id="ex-body-${this.id}" class="ex-body"></div>
         </section>` 
@@ -37,6 +43,7 @@ class Page{
                 headerButton.on('click', this.contents.callback)
             }
         }
+        $(this.element).find('#close-button').on('click', closePanel)
         this.contents.items.forEach(item => {
             item.render(`#ex-body-${this.id}`)
         })
