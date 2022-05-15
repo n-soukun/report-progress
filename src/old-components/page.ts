@@ -30,7 +30,7 @@ class Page{
             </div>
         </header>
         <div id="ex-body-${this.id}" class="ex-body"></div>
-        </section>` 
+        </section>`
         )
         this.element = $(`#ex-page-${this.id}`).get()
         $(this.element).css('z-index', id)

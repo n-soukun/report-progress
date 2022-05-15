@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-interface ReportData {
+export interface ReportData {
     index: number
     subjectId: number
     month: number
@@ -28,7 +28,7 @@ function getReport(index: number, trElements: HTMLTableRowElement[], subjectId: 
     }
 }
 
-class Subject {
+export class Subject {
     constructor (
         public id: number,
         public title: string,
@@ -63,11 +63,12 @@ class Subject {
     
 }
 
-class MonthlyReport {
+export class MonthlyReport {
     title: string
     constructor (
         public id: number,
-        public reports: Array<ReportData>
+        public reports: ReportData[],
+        public subjectNames: string[]
     ) {
         this.title = id+"月レポート"
     }
@@ -147,7 +148,7 @@ class GradeData{
 
     getMonthlyReport(id: number) {
         let reports = this.reports.filter((item) => item.month == id)
-        return new MonthlyReport(id,reports)
+        return new MonthlyReport(id,reports,this.subjectNames)
     }
 
     getNotDoneReports(){

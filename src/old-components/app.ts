@@ -1,17 +1,6 @@
 import $ from 'jquery'
 import Page, { PageData } from './page'
 
-interface AppState {
-    panel_state: boolean,
-    pages: Array<PageState<any>>
-}
-
-interface PageState<T> {
-    id: number
-    name: string
-    args: T
-}
-
 class App{
     pages: Array<Page>
     constructor () {
@@ -24,7 +13,7 @@ class App{
         $(":root").css("--ex-app-width", "360px")
     }
 
-    createPage<T>(obj: PageData, pageState: PageState<T>){
+    createPage<T>(obj: PageData){
         const id = this.pages.length
         this.pages[id] = new Page(id,obj)
         this.pages[id].render("#ex-score")
