@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   // モード値を production に設定すると最適化された状態で、
   // development に設定するとソースマップ有効でJSファイルが出力される
@@ -10,9 +12,20 @@ module.exports = {
     rules: [
       {
         // 拡張子 .ts の場合
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         // TypeScript をコンパイルする
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: { presets: ['@babel/preset-env', '@babel/react'] },
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: path.resolve(__dirname, 'tsconfig.json'),
+            },
+          },
+        ],
       },
     ],
   },
@@ -23,7 +36,7 @@ module.exports = {
   resolve: {
     // 拡張子を配列で指定
     extensions: [
-      '.ts', '.js',
+      '.ts', '.tsx', '.js',
     ],
   },
 };

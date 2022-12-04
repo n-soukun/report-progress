@@ -2,28 +2,29 @@ import React from "react"
 import Header from "../components/header"
 import ItemList from "../components/itemList"
 import GradeData from "../gradeData"
+import move from "../components/app"
 
-interface Props {
-    gradeData: GradeData
-}
+const Home: React.FC = () => {
 
-const Home: React.FC<Props> = (props) => {
+    const gradeData = new GradeData()
 
-    const items = []
+    let items = []
 
     items.push({
         title: "年間レポート",
-        value: props.gradeData.progress(),
-        text: `〆${props.gradeData.month.slice(-1)[0]}/15`,
+        value: gradeData.progress(),
+        text: `〆${gradeData.month.slice(-1)[0]}/15`,
+        onClick: () => move("yearly")
     })
 
-    const notDoneReports = props.gradeData.getNotDoneReports()
+    const notDoneReports = gradeData.getNotDoneReports()
 
-    items.concat(notDoneReports.map(month => {
+    items = items.concat(notDoneReports.map(month => {
         return {
             title: `${month}月レポート`,
             text: `〆${month}/15`,
-            value: (props.gradeData.getMonthlyReport(month)).progress()
+            value: (gradeData.getMonthlyReport(month)).progress(),
+            onClick: () => move("monthly", month)
         }
     }))
 

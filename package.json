@@ -19,8 +19,13 @@
   },
   "homepage": "https://github.com/n-soukun/seiseki-viewer#readme",
   "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7",
     "@types/jquery": "^3.5.14",
     "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "babel-loader": "^8.2.5",
     "ts-loader": "^9.3.0",
     "typescript": "^4.6.4",
     "webpack": "^5.72.1",

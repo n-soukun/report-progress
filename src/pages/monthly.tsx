@@ -3,21 +3,24 @@ import Header from '../components/header'
 import List from '../components/list'
 import ProgressBar from '../components/progressBar'
 import TabControl from '../components/tabControl'
-import { MonthlyReport } from '../gradeData'
+import GradeData from '../gradeData'
 
 interface Props {
-    monthly: MonthlyReport
+    month: number
 }
 
 const MonthlyPage: React.FC<Props> = (props) => {
+    
+    const gradeData = new GradeData()
+    const monthly = gradeData.getMonthlyReport(props.month)
 
     const tabContents = []
 
     tabContents.push({
         name: "未完了",
-        element: <List items={props.monthly.getIncompleteReports().map(report => {
+        element: <List items={monthly.getIncompleteReports().map(report => {
             return {
-                title: props.monthly.subjectNames[report.subjectId],
+                title: monthly.subjectNames[report.subjectId],
                 subText: `第${report.index}回`,
                 value: report.progress
             }
@@ -26,22 +29,22 @@ const MonthlyPage: React.FC<Props> = (props) => {
 
     tabContents.push({
         name: "完了",
-        element: <List items={props.monthly.getCompleteReports().map(report => {
+        element: <List items={monthly.getCompleteReports().map(report => {
             return {
-                title: props.monthly.subjectNames[report.subjectId],
+                title: monthly.subjectNames[report.subjectId],
                 subText: `第${report.index}回`,
                 value: report.progress
             }
         })}/>
     })
 
-    const activeTab = props.monthly.getIncompleteReports().length ? 0 : 1
+    const activeTab = monthly.getIncompleteReports().length ? 0 : 1
 
     return (
         <section className="ex-page">
-            <Header title={props.monthly.title} buttonType="back-button" />
+            <Header title={monthly.title} buttonType="back-button" />
             <div className="ex-body">
-                <ProgressBar name="進捗率" value={props.monthly.progress()}/>
+                <ProgressBar name="進捗率" value={monthly.progress()}/>
                 <TabControl tabs={tabContents} active={activeTab}/>
             </div>
         </section>

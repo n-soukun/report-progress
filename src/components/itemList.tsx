@@ -9,7 +9,7 @@ interface Props {
 const List: React.FC<Props> = (props) => {
     return (
         <ul className="item-list">
-            {props.items.map(item => <BigItem title={item.title} text={item.text} value={item.value}/>)}
+            {props.items.map(item => <BigItem title={item.title} text={item.text} value={item.value} onClick={item.onClick}/>)}
         </ul>
     )
 }

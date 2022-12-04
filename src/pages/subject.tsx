@@ -3,19 +3,22 @@ import Header from '../components/header'
 import List from '../components/list'
 import ProgressBar from '../components/progressBar'
 import TabControl from '../components/tabControl'
-import { Subject } from '../gradeData'
+import GradeData, { Subject } from '../gradeData'
 
 interface Props {
-    subject: Subject
+    subject_id: number
 }
 
 const SubjectPage: React.FC<Props> = (props) => {
 
+    const gradeData = new GradeData()
+    const subject = gradeData.getSubjectById(props.subject_id)
+    
     const tabContents = []
 
     tabContents.push({
         name: "未完了",
-        element: <List items={props.subject.getIncompleteReports().map(report => {
+        element: <List items={subject.getIncompleteReports().map(report => {
             return {
                 title: `第${report.index}回`,
                 subText: `〆${report.month}/15`,
@@ -26,7 +29,7 @@ const SubjectPage: React.FC<Props> = (props) => {
 
     tabContents.push({
         name: "完了",
-        element: <List items={props.subject.getCompleteReports().map(report => {
+        element: <List items={subject.getCompleteReports().map(report => {
             return {
                 title: `第${report.index}回`,
                 subText: `〆${report.month}/15`,
@@ -35,13 +38,13 @@ const SubjectPage: React.FC<Props> = (props) => {
         })}/>
     })
 
-    const activeTab = props.subject.getIncompleteReports().length ? 0 : 1
+    const activeTab = subject.getIncompleteReports().length ? 0 : 1
 
     return (
         <section className="ex-page">
-            <Header title={props.subject.title} buttonType="back-button" />
+            <Header title={subject.title} buttonType="back-button" />
             <div className="ex-body">
-                <ProgressBar name="進捗率" value={props.subject.progress()}/>
+                <ProgressBar name="進捗率" value={subject.progress()}/>
                 <TabControl tabs={tabContents} active={activeTab}/>
             </div>
         </section>
